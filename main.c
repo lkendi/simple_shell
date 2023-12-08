@@ -11,12 +11,15 @@
 
 int main(void)
 {
+	char *user_command;
+
 	while (true)
 	{
 		/*Display prompt*/
 		display_prompt();
 
 		/*Get command from user*/
+		get_command(*user_command);
 
 		/*Error if executable can't be found*/
 
