@@ -1,7 +1,7 @@
 #include "headers.h"
 
 /**
- * get_command - gets the user command
+ * get_command - gets the command from the user
  * @command: user command
  * @c_size: command length
  * Return: the user command
