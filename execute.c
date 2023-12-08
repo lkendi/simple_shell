@@ -1,8 +1,8 @@
 #include "headers.h"
 
 /**
- * execute - execute command
- * @user_command: user command
+* execute - execute command
+* @user_command: user command
 */
 void execute(char *user_command)
 {
@@ -24,7 +24,9 @@ void execute(char *user_command)
 	else
 	{
 		/*Execute the child process*/
-		execve(user_command, (char *[]){user_command, NULL}, (char *[]){NULL});
+		char *args[] = {user_command, NULL};
+
+		execve(user_command, args, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
