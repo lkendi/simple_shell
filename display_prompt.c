@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "headers.h"
 
 /**
  * display_prompt - displays a prompt to get user input
