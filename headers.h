@@ -2,7 +2,9 @@
 #define MAINHEADER_FILE_
 
 /**HEADER FILES*/
-
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
 
 
