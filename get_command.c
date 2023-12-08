@@ -9,6 +9,7 @@
 char *get_command(char *user_command)
 {
 	size_t len;
+	char *input;
 
 	/*Case where user command is NULL*/
 
@@ -17,7 +18,20 @@ char *get_command(char *user_command)
 		fprintf(stderr, "invalid buffer or size\n");
 	}
 
-	fgets(user_command, 100, stdin);
+	input = fgets(user_command, 100, stdin);
+
+	if (input == NULL)
+	{
+		/*Handling end of file condition*/
+		if (feof(stdin))
+		{
+			printf("\n");
+			exit(EXIT_SUCCESS);
+		}
+		printf("Error reading input"\n);
+		exit(EXIT_FAILURE);
+	}
+
 	len = strlen(user_command);
 	if (user_command[len - 1] == '\n')
 	{
