@@ -19,7 +19,7 @@
 
 
 /**FUNCTION PROTOTYPES*/
-void display_prompt();
+void display_prompt(void);
 char *get_command(char *user_command);
 void execute(char *user_command);
 
