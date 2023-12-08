@@ -28,7 +28,7 @@ char *get_command(char *user_command)
 			printf("\n");
 			exit(EXIT_SUCCESS);
 		}
-		printf("Error reading input"\n);
+		printf("Error reading input\n");
 		exit(EXIT_FAILURE);
 	}
 
