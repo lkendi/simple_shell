@@ -24,7 +24,7 @@ int main(void)
 		/*Error if executable can't be found*/
 
 		/*Execute the command*/
-
+		execute(*user_command);
 
 		/*Handle end of file condition*/
 
