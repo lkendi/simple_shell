@@ -17,7 +17,7 @@
 
 /**FUNCTION PROTOTYPES*/
 void display_prompt();
-char *get_command(char *user_command, size_t c_size);
+char *get_command(char *user_command);
 void execute(char *user_command);
 
 
