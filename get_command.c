@@ -10,7 +10,7 @@
 char *get_command(char *user_command)
 {
 	size_t len;
-
+	
 	fgets(user_command, 100, stdin);
 	len = strlen(user_command);
 	if (user_command[len - 1] == '\n')
@@ -18,4 +18,6 @@ char *get_command(char *user_command)
 		user_command[len - 1] = '\0'
 	}
 	return (user_command);
+
+	/*Add case where user command is NULL*/
 }
