@@ -16,7 +16,9 @@
 
 
 /**FUNCTION PROTOTYPES*/
-
+void display_prompt();
+int get_command(); //incomplete
+void execute(char *user_command);
 
 
 #endif
