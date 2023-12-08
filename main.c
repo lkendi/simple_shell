@@ -4,8 +4,8 @@
 
 
 /**
- * main - entry point
- * Return: to be determined
+* main - entry point
+* Return: to be determined
 */
 
 
@@ -17,6 +17,8 @@ int main(void)
 		display_prompt();
 
 		/*Get command from user*/
+
+		get_command();
 
 		/*Error if executable can't be found*/
 
