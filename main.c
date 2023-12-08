@@ -21,8 +21,6 @@ int main(void)
 		/*Get command from user*/
 		get_command(*user_command);
 
-		get_command();
-
 		/*Error if executable can't be found*/
 
 		/*Execute the command*/
