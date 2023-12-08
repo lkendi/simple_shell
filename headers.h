@@ -6,8 +6,14 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+<<<<<<< HEAD
 #include <stdbool.h>
 #include <sys/wait.h>
+=======
+#include <sys/types.h>
+
+
+>>>>>>> 7df50e0 (debugging execute.c)
 
 
 

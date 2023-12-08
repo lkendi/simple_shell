@@ -1,6 +1,9 @@
 #include "headers.h"
 
-
+/**
+ * execute - execute command
+ * @user_command: user command
+*/
 void execute(char *user_command)
 {
 	pid_t child;
@@ -25,5 +28,4 @@ void execute(char *user_command)
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-
 }
