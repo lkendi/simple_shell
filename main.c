@@ -11,5 +11,20 @@
 
 int main(void)
 {
+	while (true)
+	{
+		/*Display prompt*/
+		display_prompt();
+
+		/*Get command from user*/
+
+		/*Error if executable can't be found*/
+
+		/*Execute the command*/
+
+
+		/*Handle end of file condition*/
+
+	}
 
 }
