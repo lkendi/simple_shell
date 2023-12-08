@@ -15,18 +15,15 @@ void execute(char *user_command)
 	}
 	else if (child > 0)
 	{
-
-
-
+		/*Parent process*/
+		wait(NULL);
 	}
 	else
 	{
 		/*Execute the child process*/
-		execve(user_command, (char *[]){user_command, NULL}, (char *[]{NULL});
+		execve(user_command, (char *[]){user_command, NULL}, (char *[]){NULL});
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-
-
 
 }
