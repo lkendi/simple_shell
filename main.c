@@ -13,7 +13,7 @@ int main(void)
 {
 	char *user_command;
 
-	while (true)
+	while (1)
 	{
 		/*Display prompt*/
 		display_prompt();
