@@ -1,8 +1,5 @@
 #include "headers.h"
 
-
-
-
 /**
 * main - entry point
 * Return: to be determined
@@ -11,7 +8,7 @@
 
 int main(void)
 {
-	char *user_command;
+	char user_command[100];
 
 	while (1)
 	{
@@ -19,14 +16,10 @@ int main(void)
 		display_prompt();
 
 		/*Get command from user*/
-		get_command(*user_command);
-
-		/*Error if executable can't be found*/
+		get_command(user_command);
 
 		/*Execute the command*/
-		execute(*user_command);
-
-		/*Handle end of file condition*/
+		execute(user_command);
 
 	}
 

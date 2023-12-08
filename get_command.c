@@ -15,7 +15,7 @@ char *get_command(char *user_command)
 
 	if (user_command == NULL)
 	{
-		fprintf(stderr, "invalid buffer or size\n");
+		fprintf(stderr, "invalid command\n");
 	}
 
 	input = fgets(user_command, 100, stdin);

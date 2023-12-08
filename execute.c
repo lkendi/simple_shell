@@ -7,6 +7,13 @@
 void execute(char *user_command)
 {
 	pid_t child;
+	char *args[2];
+	
+	if (user_command == NULL)
+	{
+		fprintf(stderr, "Invalid command\n");
+		exit(EXIT_FAILURE);
+	}
 
 	/*Create a child process*/
 	child = fork();
@@ -23,11 +30,15 @@ void execute(char *user_command)
 	}
 	else
 	{
-		/*Execute the child process*/
-		char *args[] = {user_command, NULL};
+		args[0] = user_command;
+		args[1] = NULL;
 
-		execve(user_command, args, NULL);
-		perror("execve");
-		exit(EXIT_FAILURE);
+		/*Execute the child process*/
+		if (execve(user_command, args, NULL) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+		exit(EXIT_SUCCESS);
 	}
 }
