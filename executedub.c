@@ -1,4 +1,4 @@
-#include "headers.h"
+/*#include "headers.h"*/
 
 /**
 * get_env_var - gets the value of an environment variable
@@ -6,7 +6,7 @@
 * Return: <TBD>
 */
 
-char *get_env_var(const char *var)
+/*char *get_env_var(const char *var)
 {
 	if (var == NULL)
 	{
@@ -37,13 +37,13 @@ char *get_env_var(const char *var)
 		current_env++;
 	}
 	return (NULL);
-}
+}*/
 
 /**
 * execute - execute command
 * @user_command: user command
 */
-void execute(char *user_command)
+/**void execute(char *user_command)
 {
 	pid_t child;
 	char *args[2];
@@ -64,6 +64,7 @@ void execute(char *user_command)
 	}
 	token = strtok(path_val, ":");
 	/*Create a child process*/
+    /**
 	child = fork();
 	if (child < 0)
 	{
@@ -73,6 +74,7 @@ void execute(char *user_command)
 	else if (child > 0)
 	{
 		/*Parent process*/
+        /**
 		wait(NULL);
 	}
 	else
@@ -81,6 +83,7 @@ void execute(char *user_command)
 		args[1] = NULL;
 
 		/*Execute the child process*/
+        /**
 		if (execve(user_command, args, NULL) == -1)
 		{
 			fprintf(stderr, "./hsh: %d: %s: not found\n", child, user_command);
@@ -89,3 +92,5 @@ void execute(char *user_command)
 		exit(EXIT_SUCCESS);
 	}
 }
+*/
+
