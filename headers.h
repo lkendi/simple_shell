@@ -20,9 +20,12 @@
 
 /**FUNCTION PROTOTYPES*/
 void display_prompt(void);
-char *get_command(char *user_command);
+char **get_command(void);
+char *get_command_path(char *user_command);
+void _execute(char **args);
+
+/*not in use currently*/
+char *get_cmd(char *user_command);
 void execute(char *user_command);
-char *get_env_var(const char *var);
-char *get_path_cmd(char *user_command);
-void exec(char **args);
+char *get_command_path(char *user_command);
 #endif

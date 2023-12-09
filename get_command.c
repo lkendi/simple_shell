@@ -6,35 +6,52 @@
 * Return: the user command
 */
 
-char *get_command(char *user_command)
+char **get_command(void)
 {
-	size_t len;
-	char *input;
+	size_t len = 0;
+	ssize_t input_char_count;
+	char *user_input = NULL, *input_copy = NULL;
+	int i, token_count = 0;
+	char **args = NULL, *token;
 
-	/*Case where user command is NULL*/
+	input_char_count = getline(&user_input, &len, stdin);
 
-	if (user_command == NULL)
+	/*if getline fails or EOF condition*/
+	if (input_char_count == -1)
 	{
-		fprintf(stderr, "invalid command\n");
-	}
-	input = fgets(user_command, 100, stdin);
-
-	if (input == NULL)
-	{
-		/*Handling end of file condition*/
-		if (feof(stdin))
-		{
-			printf("\n");
-			exit(EXIT_SUCCESS);
-		}
-		printf("Error reading input\n");
+		printf("\n");
 		exit(EXIT_FAILURE);
 	}
 
-	len = strlen(user_command);
-	if (user_command[len - 1] == '\n')
+	input_copy = malloc(input_char_count * sizeof(char));
+	if (input_copy == NULL)
 	{
-		user_command[len - 1] = '\0';
+		perror("malloc error");
+		exit (EXIT_FAILURE);
 	}
-	return (user_command);
+	strcpy(input_copy, user_input);
+
+	/*split the user_input string*/
+	token = strtok(user_input, " ");
+	while (token != NULL)
+	{
+		token_count++;
+		token = strtok(NULL, " ");
+	}
+	token_count++;
+
+	/*add each token to an array*/
+	args = malloc(token_count * sizeof(char *));
+	token = strtok(input_copy, " ");
+	while (token != NULL)
+	{
+		args[i] = malloc(strlen(token) * sizeof(char));
+		strcpy(args[i], token);
+		token = strtok(NULL, " ");
+		i++;
+	}
+	args[i] = NULL;
+	free(input_copy);
+	free(user_input);
+	return (args);
 }

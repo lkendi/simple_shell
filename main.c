@@ -6,11 +6,10 @@
 */
 
 
-int main(int argc, char **argv)
+int main(void)
 {
-	char user_command[100];
-
-	(void)argc;
+	char **args;
+	int i = 0;
 
 	while (1)
 	{
@@ -18,11 +17,21 @@ int main(int argc, char **argv)
 		display_prompt();
 
 		/*Get command from user*/
-		get_command(user_command);
+		args = get_command();
 
 		/*Execute the command*/
-		exec(argv);
+		_execute(args);
 
+		/*Free args memory*/
+		if (args != NULL)
+		{
+			while (args[i] != NULL)
+			{
+				free(args[i]);
+				i++;
+			}
+			free(args);
+		}
 	}
 
 	return (0);
