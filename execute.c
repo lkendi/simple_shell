@@ -49,18 +49,14 @@ void execute(char *user_command)
 		fprintf(stderr, "Invalid command\n");
 		exit(EXIT_FAILURE);
 	}
-
 	path_val = get_env_var("PATH");
 	if (path_val == NULL)
 	{
 		fprintf(stderr, "PATH: not found\n");
 	}
-
 	token = strtok(path_val, ":");
-
 	/*Create a child process*/
 	child = fork();
-
 	if (child < 0)
 	{
 		perror("fork");
