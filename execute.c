@@ -20,7 +20,7 @@ void execute(char *user_command)
 
 	if (child < 0)
 	{
-		perror("fork failure");
+		perror("fork");
 		exit(EXIT_FAILURE);
 	}
 	else if (child > 0)
@@ -33,11 +33,12 @@ void execute(char *user_command)
 	{
 		args[0] = user_command;
 		args[1] = NULL;
+		cpid = getpid();
 
 		/*Execute the child process*/
 		if (execve(user_command, args, NULL) == -1)
 		{
-			perror("./hsh");
+			fprintf(stderr, "./hsh: %d: %s: not found\n", child, user_command);
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
