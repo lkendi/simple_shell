@@ -8,7 +8,7 @@ void execute(char *user_command)
 {
 	pid_t child;
 	char *args[2];
-	
+
 	if (user_command == NULL)
 	{
 		fprintf(stderr, "Invalid command\n");
@@ -25,6 +25,7 @@ void execute(char *user_command)
 	}
 	else if (child > 0)
 	{
+
 		/*Parent process*/
 		wait(NULL);
 	}
@@ -36,7 +37,7 @@ void execute(char *user_command)
 		/*Execute the child process*/
 		if (execve(user_command, args, NULL) == -1)
 		{
-			perror("execve");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
