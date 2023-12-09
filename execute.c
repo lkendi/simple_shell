@@ -8,13 +8,29 @@
 
 char *get_env_var(const char *var)
 {
-	extern char **envs_vars;
-	size_t var_len;
-	char *env;
+	extern char **env_vars;
+	char **current_env;
+	char *token;
 
-	var_len = strlen(var);	
-	
+	if (var == NULL)
+	{
+		return (NULL);
+	}
 
+	current_env = env_vars;
+	while (current_env != NULL)
+	{
+		token = strtok(current_env, "=");
+		if (token != NULL)
+		{
+			if (strcmp(var, token) == 0)
+			{
+				return (strtok("NULL", "="));
+			}
+			current_env++;
+		}
+	}
+	return (NULL);
 }
 
 /**
