@@ -8,37 +8,37 @@ void execute(char *user_command)
 {
 	pid_t child;
 	char *args[2];
+	char *path_val, *path_dup, *p_token, *full_cmd;
+	struct stat b_stat;
 
 	if (user_command == NULL)
 	{
 		fprintf(stderr, "Invalid command\n");
 		exit(EXIT_FAILURE);
 	}
-
-	/*Create a child process*/
-	child = fork();
-
-	if (child < 0)
+	path_val = get_env_var("PATH");
+	if (path_val != NULL)
 	{
-		perror("fork");
-		exit(EXIT_FAILURE);
+		path_dup = strdup(path_val);
 	}
-	else if (child > 0)
+	p_token = strtok(path_dup, ":");
+	while (p_token != NULL)
 	{
-		/*Parent process*/
-		wait(NULL);
-	}
-	else
-	{
-		args[0] = user_command;
-		args[1] = NULL;
+		full_cmd = malloc(strlen(user_command) + strlen(p_token) + 2);
+		strcpy(full_cmd, p_token);
+		strcat(full_cmd, '/');
+		strcat(full_cmd, user_command);
+		strcat(full_cmd, '\0');
 
-		/*Execute the child process*/
-		if (execve(user_command, args, NULL) == -1)
+		if (stat(full_cmd, &b_stat) == 0)
 		{
-			fprintf(stderr, "./hsh: %d: %s: not found\n", child, user_command);
-			exit(EXIT_FAILURE);
+			return (full_cmd);
+			free(path_dup);
 		}
-		exit(EXIT_SUCCESS);
-	}
+		else
+		{
+			free(full_cmd);
+			p_token = strtok(NULL, ":");
+		}
+	}	
 }
