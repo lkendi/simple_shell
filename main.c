@@ -1,12 +1,12 @@
 #include "headers.h"
 
 /**
-* main - entry point
-* Return: to be determined
+* main - entry point 
+* Return: 0
 */
 
 
-int main(void)
+int main()
 {
 	char user_command[100];
 
@@ -22,5 +22,7 @@ int main(void)
 		execute(user_command);
 
 	}
+
+	return (0);
 
 }

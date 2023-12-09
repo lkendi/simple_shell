@@ -17,7 +17,6 @@ char *get_command(char *user_command)
 	{
 		fprintf(stderr, "invalid command\n");
 	}
-
 	input = fgets(user_command, 100, stdin);
 
 	if (input == NULL)
@@ -38,6 +37,4 @@ char *get_command(char *user_command)
 		user_command[len - 1] = '\0';
 	}
 	return (user_command);
-
 }
-
