@@ -17,7 +17,8 @@ char *get_env_var(const char *var)
 		return (NULL);
 	}
 
-	current_env = env_vars;
+	char **current_env = environment;
+
 	while (current_env != NULL)
 	{
 		token = strtok(current_env, "=");
