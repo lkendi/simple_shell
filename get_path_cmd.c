@@ -25,17 +25,22 @@ char *get_path_cmd(char *user_command)
 		while (p_token != NULL)
 		{
 			full_cmd = malloc(strlen(user_command) + strlen(p_token) + 2);
+			if (full_cmd == NULL)
+			{
+				perror("malloc");
+				exit(EXIT_FAILURE);
+			}
 			strcpy(full_cmd, p_token);
-			strcat(full_cmd, '/');
+			strcat(full_cmd, "/");
 			strcat(full_cmd, user_command);
-			strcat(full_cmd, '\0');
+			strcat(full_cmd, "\0");
 
 			if (stat(full_cmd, &b_stat) == 0)
 			{
 				free(path_dup);
 				return (full_cmd);
 			}
-		}
+
 			else
 			{
 				free(full_cmd);

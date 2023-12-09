@@ -17,10 +17,10 @@ char *get_env_var(const char *var)
                 return (NULL);
         }
 
-        current_env = env_vars;
+        current_env = environment;
         while (current_env != NULL)
         {
-                token = strtok(current_env, "=");
+                token = strtok(*current_env, "=");
                 if (token != NULL)
                 {
                         if (strcmp(var, token) == 0)

@@ -6,9 +6,11 @@
 */
 
 
-int main()
+int main(int argc, char **argv)
 {
 	char user_command[100];
+
+	(void)argc;
 
 	while (1)
 	{
@@ -19,7 +21,7 @@ int main()
 		get_command(user_command);
 
 		/*Execute the command*/
-		execute(user_command);
+		exec(argv);
 
 	}
 

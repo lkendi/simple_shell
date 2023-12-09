@@ -15,7 +15,7 @@ void exec(char **args)
 		
 	if (cmd_path != NULL)
 	{
-		if (execve(cmd2, args, NULL) == -1)
+		if (execve(cmd_path, args, NULL) == -1)
 		{
 			perror("excve");
 			exit(EXIT_FAILURE);
