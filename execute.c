@@ -1,5 +1,8 @@
 #include "headers.h"
 
+/*Extern variable containing the env vars*/
+char **env_vars;
+
 /**
  * get_env_var - gets the value of an environment variable
  * @var: name of the environment variable
@@ -8,7 +11,6 @@
 
 char *get_env_var(const char *var)
 {
-	extern char **env_vars;
 	char **current_env;
 	char *token;
 
@@ -41,13 +43,22 @@ void execute(char *user_command)
 {
 	pid_t child;
 	char *args[2];
-	char *path;
+	char *path_val;
+	char *token;
 
 	if (user_command == NULL)
 	{
 		fprintf(stderr, "Invalid command\n");
 		exit(EXIT_FAILURE);
 	}
+
+	path_val = get_env_var("PATH");
+	if (path_val == NULL)
+	{
+		fprintf("PATH: not found\n");
+	}
+
+	token = strtok(path_val, ":");
 
 	/*Create a child process*/
 	child = fork();
