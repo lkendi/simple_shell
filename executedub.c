@@ -1,14 +1,12 @@
-#include "headers.h"
+/*#include "headers.h"*/
 
 /**
-<<<<<<< HEAD
-=======
 * get_env_var - gets the value of an environment variable
 * @var: name of the environment variable
 * Return: <TBD>
 */
 
-char *get_env_var(const char *var)
+/*char *get_env_var(const char *var)
 {
 	if (var == NULL)
 	{
@@ -39,26 +37,20 @@ char *get_env_var(const char *var)
 		current_env++;
 	}
 	return (NULL);
-}
+}*/
 
 /**
->>>>>>> 1c3c04c875675bb3252eda1f6595adc64ea1e127
 * execute - execute command
 * @user_command: user command
 */
-void execute(char *user_command)
+/**void execute(char *user_command)
 {
 	pid_t child;
 	char *args[2];
-<<<<<<< HEAD
-	char *path_val, *path_dup, *p_token, *full_cmd;
-	struct stat b_stat;
-=======
 
 	char *path_val;
 
 	char *token;
->>>>>>> 1c3c04c875675bb3252eda1f6595adc64ea1e127
 
 	if (user_command == NULL)
 	{
@@ -66,28 +58,39 @@ void execute(char *user_command)
 		exit(EXIT_FAILURE);
 	}
 	path_val = get_env_var("PATH");
-	if (path_val != NULL)
+	if (path_val == NULL)
 	{
-		path_dup = strdup(path_val);
+		fprintf(stderr, "PATH: not found\n");
 	}
-	p_token = strtok(path_dup, ":");
-	while (p_token != NULL)
+	token = strtok(path_val, ":");
+	/*Create a child process*/
+    /**
+	child = fork();
+	if (child < 0)
 	{
-		full_cmd = malloc(strlen(user_command) + strlen(p_token) + 2);
-		strcpy(full_cmd, p_token);
-		strcat(full_cmd, '/');
-		strcat(full_cmd, user_command);
-		strcat(full_cmd, '\0');
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (child > 0)
+	{
+		/*Parent process*/
+        /**
+		wait(NULL);
+	}
+	else
+	{
+		args[0] = user_command;
+		args[1] = NULL;
 
-		if (stat(full_cmd, &b_stat) == 0)
+		/*Execute the child process*/
+        /**
+		if (execve(user_command, args, NULL) == -1)
 		{
-			return (full_cmd);
-			free(path_dup);
+			fprintf(stderr, "./hsh: %d: %s: not found\n", child, user_command);
+			exit(EXIT_FAILURE);
 		}
-		else
-		{
-			free(full_cmd);
-			p_token = strtok(NULL, ":");
-		}
-	}	
+		exit(EXIT_SUCCESS);
+	}
 }
+*/
+
