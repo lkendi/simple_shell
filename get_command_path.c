@@ -8,7 +8,7 @@
 
 char *get_command_path(char *user_command)
 {
-	char *path_val, *path_dup, *p_token, *full_path;
+	char *path_val = NULL, *path_dup = NULL, *p_token, *full_path = NULL;
 	struct stat stat_buffer;
 	int c_length, d_length;
 
@@ -38,7 +38,7 @@ char *get_command_path(char *user_command)
 			strcpy(full_path, p_token);
 			strcat(full_path, "/");
 			strcat(full_path, user_command);
-			/*strcat(full_path, "\0");*/
+			strcat(full_path, "\0");
 
 			if (stat(full_path, &stat_buffer) == 0)
 			{

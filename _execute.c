@@ -1,7 +1,5 @@
 #include "headers.h"
 
-
-void excve(char *cmd, char **args);
 /**
  * excve - execute a cmd
  * @cmd: command
@@ -28,38 +26,54 @@ void _execute(char **args)
 
 	if (args == NULL)
 	{
-		fprintf(stderr, "invalid command\n");
-		exit(EXIT_FAILURE);
+		return;
 	}
 	cmd = args[0];
-	/*PATH handling*/
-	cmd_path = get_command_path(cmd);
 
-	if (cmd_path != NULL)
+	/*Exit command*/
+	if (strcmp(cmd, "exit") == 0)
 	{
-		if (execve(cmd_path, args, NULL) == -1)
-		{
-			perror("excve");
-			free(cmd_path);
-			exit(EXIT_FAILURE);
-		}
+		exit(EXIT_SUCCESS);
+	}
+
+	if(cmd[0] == '/')
+	{
+		cmd_path = strdup(cmd);
 	}
 	else
 	{
-		/*If command not found in PATH*/
+		cmd_path = get_command_path(cmd);
+	}
+
+	if (cmd_path != NULL)
+	{
 		child = fork();
 		if (child < 0)
 		{
 			perror("fork");
+			free(cmd_path);
 			exit(EXIT_FAILURE);
+		}
+		else if (child == 0)
+		{
+			if (execve(cmd_path, args, NULL) == -1)
+			{
+				perror("excve");
+				free(cmd_path);
+				exit(EXIT_FAILURE);
+			}
 		}
 		else if (child > 0)
 		{
 			wait(NULL);
+			free(cmd_path);
 		}
-		else
-		{
-			excve(cmd, args);
-		}
+
+	}
+	else
+	{
+		fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
 	}
 }
+
+	

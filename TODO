@@ -1,9 +1,9 @@
 // TASK one Simple shell
 
-// Implement correct output erros
+// Implement correct output errors
 // Implement interactive and non-interactive mode
 // check printf functions
 // avoiding memory leaks
 // betty
-//check on unprogrammed exit
+//env built-in command
 

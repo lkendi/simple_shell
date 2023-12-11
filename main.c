@@ -8,8 +8,7 @@
 int main(void)
 {
 	char **args;
-	int i = 0;
-
+	
 	while (1)
 	{
 		/*Display prompt*/
@@ -21,16 +20,6 @@ int main(void)
 		/*Execute the command*/
 		_execute(args);
 
-		/*Free args memory*/
-		if (args != NULL)
-		{
-			while (args[i] != NULL)
-			{
-				free(args[i]);
-				i++;
-			}
-			free(args);
-		}
 	}
 
 	return (0);

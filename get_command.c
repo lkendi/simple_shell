@@ -2,14 +2,13 @@
 
 /**
 * get_command - gets the command from the user
-* @user_command: user command
 * Return: the user command
 */
 
 char **get_command(void)
 {
+	ssize_t input_char_count = 0;
 	size_t len = 0;
-	ssize_t input_char_count;
 	char *user_input = NULL, *input_copy = NULL;
 	int i = 0, token_count = 0;
 	char **args = NULL, *token;
@@ -20,10 +19,18 @@ char **get_command(void)
 	if (input_char_count == -1)
 	{
 		printf("\n");
+		free(user_input);
 		exit(EXIT_FAILURE);
 	}
 
-	input_copy = malloc(input_char_count * sizeof(char));
+	/*If enter key only (newline)*/
+	if (input_char_count == 1 && strcmp(user_input, "\n") == 0)
+	{
+		free(user_input);
+		return (NULL);
+	}
+
+	input_copy = malloc((input_char_count + 1) * sizeof(char));
 	if (input_copy == NULL)
 	{
 		perror("malloc error");
@@ -45,7 +52,7 @@ char **get_command(void)
 	token = strtok(input_copy, " \n");
 	while (token != NULL)
 	{
-		args[i] = malloc(strlen(token) * sizeof(char));
+		args[i] = malloc((strlen(token) + 1) * sizeof(char));
 		strcpy(args[i], token);
 		token = strtok(NULL, " \n");
 		i++;
@@ -54,4 +61,5 @@ char **get_command(void)
 	free(input_copy);
 	free(user_input);
 	return (args);
+
 }
