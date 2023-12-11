@@ -13,7 +13,7 @@ int main(void)
 	while (1)
 	{
 		/*Display prompt*/
-		display_prompt();
+		_prompt();
 
 		/*Get command from user*/
 		args = get_command();
