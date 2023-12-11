@@ -1,7 +1,8 @@
 #include "headers.h"
 /**
  * _execute - executing the command
- * @args: args
+ * @args: command input from the user
+ * Return: nothing
 */
 
 void _execute(char **args)
