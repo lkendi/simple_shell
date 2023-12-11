@@ -1,4 +1,8 @@
 #include "headers.h"
+/**
+ * _execute - executing the command
+ * @args: args
+*/
 
 void _execute(char **args)
 {
@@ -9,10 +13,10 @@ void _execute(char **args)
 		fprintf(stderr, "invalid command\n");
 		exit(EXIT_FAILURE);
 	}
-	
+
 	cmd = args[0];
 	cmd_path = get_command_path(cmd);
-		
+
 	if (cmd_path != NULL)
 	{
 		if (execve(cmd_path, args, NULL) == -1)
@@ -20,7 +24,7 @@ void _execute(char **args)
 			perror("excve");
 			free(cmd_path);
 			exit(EXIT_FAILURE);
-		}	
+		}
 	}
 	else
 	{
