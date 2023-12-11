@@ -1,7 +1,7 @@
 #include "headers.h"
 
 /**
- * display_prompt - displays a prompt to get user input
+ * _prompt - displays a prompt to get user input
  * Return: nothing
  */
 

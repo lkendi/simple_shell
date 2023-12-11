@@ -8,7 +8,7 @@
 int main(void)
 {
 	char **args;
-	int i;
+	int i = 0;
 
 	while (1)
 	{
@@ -22,7 +22,6 @@ int main(void)
 		_execute(args);
 
 		/*Free args memory*/
-		i = 0;
 		if (args != NULL)
 		{
 			while (args[i] != NULL)
