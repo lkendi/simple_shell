@@ -1,14 +1,14 @@
 #include "headers.h"
 
 /**
-* main - entry point 
+* main - entry point
 * Return: 0
 */
 
 int main(void)
 {
 	char **args;
-	int i = 0;
+	int i;
 
 	while (1)
 	{
@@ -22,6 +22,7 @@ int main(void)
 		_execute(args);
 
 		/*Free args memory*/
+		i = 0;
 		if (args != NULL)
 		{
 			while (args[i] != NULL)
