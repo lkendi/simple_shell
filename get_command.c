@@ -11,7 +11,7 @@ char **get_command(void)
 	size_t len = 0;
 	ssize_t input_char_count;
 	char *user_input = NULL, *input_copy = NULL;
-	int i, token_count = 0;
+	int i = 0, token_count = 0;
 	char **args = NULL, *token;
 
 	input_char_count = getline(&user_input, &len, stdin);
@@ -32,22 +32,22 @@ char **get_command(void)
 	strcpy(input_copy, user_input);
 
 	/*split the user_input string*/
-	token = strtok(user_input, " ");
+	token = strtok(user_input, " \n");
 	while (token != NULL)
 	{
 		token_count++;
-		token = strtok(NULL, " ");
+		token = strtok(NULL, " \n");
 	}
 	token_count++;
 
 	/*add each token to an array*/
 	args = malloc(token_count * sizeof(char *));
-	token = strtok(input_copy, " ");
+	token = strtok(input_copy, " \n");
 	while (token != NULL)
 	{
 		args[i] = malloc(strlen(token) * sizeof(char));
 		strcpy(args[i], token);
-		token = strtok(NULL, " ");
+		token = strtok(NULL, " \n");
 		i++;
 	}
 	args[i] = NULL;

@@ -12,6 +12,8 @@ void execute(char **args)
         /*command path*/
         cmd_path = get_command_path(cmd);
 
+        printf("Path found: %s", cmd_path);
+        
         /*execute the command*/
         if (execve(cmd_path, args, NULL) == -1)
         {

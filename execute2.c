@@ -2,7 +2,7 @@
 
 void _execute(char **args)
 {
-	char *cmd, *cmd_path;
+	char *cmd = NULL, *cmd_path = NULL;
 
 	if (args == NULL)
 	{
@@ -21,11 +21,10 @@ void _execute(char **args)
 			free(cmd_path);
 			exit(EXIT_FAILURE);
 		}	
-		free(cmd_path);
 	}
 	else
 	{
-		fprintf(stderr, "%s: not found\n", cmd);
+		fprintf(stderr, "./hsh: %s: not found\n", cmd);
 		exit(EXIT_FAILURE);
 	}
 }

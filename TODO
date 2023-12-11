@@ -2,6 +2,6 @@
 
 // Implement correct output erros
 // Implement interactive and non-interactive mode
-// check on print
+// Change the printf functions to _print
 // avoiding memory leaks
 

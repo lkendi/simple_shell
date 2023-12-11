@@ -15,7 +15,13 @@ void execute(char *user_command)
 		exit(EXIT_FAILURE);
 	}
 
-	     /*Create a child process*/
+        /*Remove newline from user_command*/
+        if (user_command[strlen(user_command) - 1] == '\n')
+        {
+                user_command[strlen(user_command) - 1] = '\0';
+        }
+
+	/*Create a child process*/
         child = fork();
         if (child < 0)
         {
@@ -35,9 +41,11 @@ void execute(char *user_command)
                 /*Execute the child process*/
                 if (execve(user_command, args, NULL) == -1)
                 {
-                        fprintf(stderr, "./hsh: %d: %s: not found\n", child, user_command);
+                        fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), user_command);
                         exit(EXIT_FAILURE);
                 }
                 exit(EXIT_SUCCESS);
+
+                
         }
 }
