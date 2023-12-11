@@ -2,6 +2,7 @@
 
 // Implement correct output erros
 // Implement interactive and non-interactive mode
-// Change the printf functions to _print
+// check printf functions
 // avoiding memory leaks
+// betty
 
