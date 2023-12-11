@@ -26,7 +26,6 @@ char *get_command_path(char *user_command)
 		c_length = strlen(user_command);
 		p_token = strtok(path_dup, ":");
 			
-		printf("p_token: %s", p_token);
 		while (p_token != NULL)
 		{
 			d_length = strlen(p_token);
@@ -41,9 +40,6 @@ char *get_command_path(char *user_command)
 			strcat(full_path, "/");
 			strcat(full_path, user_command);
 			/*strcat(full_path, "\0");*/
-
-
-			printf("Full cmd: %s", full_path);
 
 			if (stat(full_path, &stat_buffer) == 0)
 			{
@@ -61,6 +57,6 @@ char *get_command_path(char *user_command)
 	
 		perror("getenv");
 		exit(EXIT_FAILURE);
-		return ("pathhh");
+		return (NULL);
 }
 
