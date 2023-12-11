@@ -21,7 +21,6 @@ char *get_command_path(char *user_command)
 	path_val = getenv("PATH");
 	if (path_val != NULL)
 	{
-		
 		path_dup = strdup(path_val);
 		c_length = strlen(user_command);
 		p_token = strtok(path_dup, ":");
@@ -54,9 +53,6 @@ char *get_command_path(char *user_command)
 		}
 		free(path_dup);
 	}
-	
-		perror("getenv");
-		exit(EXIT_FAILURE);
 		return (NULL);
 }
 

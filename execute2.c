@@ -6,6 +6,7 @@
 
 void _execute(char **args)
 {
+	pid_t child;
 	char *cmd = NULL, *cmd_path = NULL;
 
 	if (args == NULL)
@@ -15,6 +16,8 @@ void _execute(char **args)
 	}
 
 	cmd = args[0];
+
+	/*PATH handling*/
 	cmd_path = get_command_path(cmd);
 
 	if (cmd_path != NULL)
@@ -28,7 +31,25 @@ void _execute(char **args)
 	}
 	else
 	{
-		fprintf(stderr, "./hsh: %s: not found\n", cmd);
-		exit(EXIT_FAILURE);
+		/*If command not found in PATH*/
+		child = fork();
+		if (child < 0)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+		else if (child > 0)
+        {
+                /*Parent process*/
+                wait(NULL);
+        }
+		else
+		{
+			 if (execve(cmd, args, NULL) == -1)
+                {
+                        fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
+                        exit(EXIT_FAILURE);
+                }
+		}
 	}
 }
