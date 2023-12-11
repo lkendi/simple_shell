@@ -1,10 +1,26 @@
 #include "headers.h"
+
+
+void excve(char *cmd, char **args);
+/**
+ * excve - execute a cmd
+ * @cmd: command
+ * @args: user-input
+*/
+
+void excve(char *cmd, char **args)
+{
+	if (execve(cmd, args, NULL) == -1)
+	{
+		fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
+		exit(EXIT_FAILURE);
+	}
+}
 /**
  * _execute - executing the command
  * @args: command input from the user
  * Return: nothing
 */
-
 void _execute(char **args)
 {
 	pid_t child;
@@ -15,9 +31,7 @@ void _execute(char **args)
 		fprintf(stderr, "invalid command\n");
 		exit(EXIT_FAILURE);
 	}
-
 	cmd = args[0];
-
 	/*PATH handling*/
 	cmd_path = get_command_path(cmd);
 
@@ -40,17 +54,12 @@ void _execute(char **args)
 			exit(EXIT_FAILURE);
 		}
 		else if (child > 0)
-        {
-                /*Parent process*/
-                wait(NULL);
-        }
+		{
+			wait(NULL);
+		}
 		else
 		{
-			 if (execve(cmd, args, NULL) == -1)
-                {
-                        fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
-                        exit(EXIT_FAILURE);
-                }
+			excve(cmd, args);
 		}
 	}
 }
