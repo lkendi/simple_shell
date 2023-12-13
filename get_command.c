@@ -41,4 +41,5 @@ char **get_command(void)
 	free(input_copy);
 	free(user_input);
 	return (args);
+	_free(args);
 }

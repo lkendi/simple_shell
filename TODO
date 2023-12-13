@@ -4,6 +4,6 @@
 // Implement interactive and non-interactive mode
 // check printf functions
 // avoiding memory leaks
-// betty
 //env built-in command
+//return value of main function
 

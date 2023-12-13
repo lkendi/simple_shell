@@ -20,6 +20,10 @@ int main(void)
 		/*Execute the command*/
 		_execute(args);
 
+		/*Free memory*/
+		_free(args);
 	}
+
 	return (0);
+
 }

@@ -38,4 +38,5 @@ char **_tokenize(char *input_copy)
 	}
 	args[i] = NULL;
 	return (args);
+	_free(args);
 }

@@ -18,6 +18,7 @@ char *get_command_path(char *user_command);
 void excve(char *cmd, char **args);
 void _execute(char **args);
 char **_tokenize(char *input_copy);
+void _free(char **args);
 
 
 #endif
