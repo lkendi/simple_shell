@@ -28,12 +28,15 @@ char **get_command(void)
 		exit(EXIT_FAILURE);
 	}
 
-	/*If enter key only (newline)*/
-	if (input_char_count == 1 && strcmp(user_input, "\n") == 0)
+	/*If enter key only (newline) or spaces*/
+	if ((input_char_count == 1 && strcmp(user_input, "\n") == 0 )|| 
+			(strspn(user_input, " \t\n") == strlen(user_input)))
 	{
 		free(user_input);
 		return (NULL);
 	}
+
+	
 
 	input_copy = malloc((input_char_count + 1) * sizeof(char));
 	if (input_copy == NULL)
