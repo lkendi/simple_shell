@@ -36,7 +36,8 @@ char **_tokenize(char *input_copy)
 		token = strtok(NULL, " \n");
 		i++;
 	}
+    free(token);
 	args[i] = NULL;
 	return (args);
-	_free(args);
+	free(args);
 }

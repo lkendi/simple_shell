@@ -23,7 +23,7 @@ int main(void)
 		/*Free memory*/
 		_free(args);
 	}
-
 	return (0);
+	_free(args);
 
 }

@@ -16,7 +16,14 @@ char **get_command(void)
 	/*if getline fails or EOF condition*/
 	if (input_char_count == -1)
 	{
-		printf("\n");
+		if (feof(stdin))
+		{
+			printf("\n");
+			free(user_input);
+			exit(EXIT_SUCCESS);
+
+		}
+		perror("error");
 		free(user_input);
 		exit(EXIT_FAILURE);
 	}
@@ -37,9 +44,7 @@ char **get_command(void)
 	strcpy(input_copy, user_input);
 
 	args = _tokenize(input_copy);
-
 	free(input_copy);
 	free(user_input);
 	return (args);
-	_free(args);
 }
