@@ -1,20 +1,6 @@
 #include "headers.h"
 
 /**
- * excve - execute a cmd
- * @cmd: command
- * @args: user-input
-*/
-
-void excve(char *cmd, char **args)
-{
-	if (execve(cmd, args, NULL) == -1)
-	{
-		fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
-		exit(EXIT_FAILURE);
-	}
-}
-/**
  * _execute - executing the command
  * @args: command input from the user
  * Return: nothing
@@ -30,21 +16,10 @@ void _execute(char **args)
 	}
 	cmd = args[0];
 
-	/*Exit command*/
 	if (strcmp(cmd, "exit") == 0)
-	{
 		exit(EXIT_SUCCESS);
-	}
 
-	if(cmd[0] == '/')
-	{
-		cmd_path = strdup(cmd);
-	}
-	else
-	{
-		cmd_path = get_command_path(cmd);
-	}
-
+	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
 	if (cmd_path != NULL)
 	{
 		child = fork();
@@ -68,12 +43,8 @@ void _execute(char **args)
 			wait(NULL);
 			free(cmd_path);
 		}
-
 	}
 	else
-	{
 		fprintf(stderr, "./hsh: %d: %s: not found \n", getpid(), cmd);
-	}
 }
 
-	

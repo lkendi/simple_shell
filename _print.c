@@ -8,5 +8,5 @@
 
 void _print(char *str)
 {
-    write(0, str, strlen(str));
+	write(0, str, strlen(str));
 }

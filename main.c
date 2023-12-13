@@ -8,7 +8,7 @@
 int main(void)
 {
 	char **args;
-	
+
 	while (1)
 	{
 		/*Display prompt*/
@@ -21,7 +21,5 @@ int main(void)
 		_execute(args);
 
 	}
-
 	return (0);
-
 }
