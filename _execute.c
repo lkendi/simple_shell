@@ -1,14 +1,54 @@
 #include "headers.h"
 
+
+void handle_execve_failure(char *cmd_path, char **args);
+void handle_command_not_found(char *cmd, int cmd_count);
+void handle_fork_failure(char *cmd_path);
 /**
- * _execute - executing the command
- * @args: command input from the user
- * Return: nothing
+* handle_execve_failure - handles execve failure
+* @cmd_path: command path
+* @args: command arguments
+*
+*/
+void handle_execve_failure(char *cmd_path, char **args)
+{
+	perror("execve");
+	free(cmd_path);
+	_free(args);
+	exit(EXIT_FAILURE);
+}
+
+/**
+* handle_command_not_found - handles the case when the command is not found
+* @cmd: command name
+* @cmd_count: command count
+* Return: nothing
+*/
+void handle_command_not_found(char *cmd, int cmd_count)
+{
+	fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
+}
+/**
+* handle_fork_failure - handle fork failure
+* @cmd_path: command path
+*/
+
+void handle_fork_failure(char *cmd_path)
+{
+	perror("fork");
+	free(cmd_path);
+	exit(EXIT_FAILURE);
+}
+/**
+* _execute - executing the command
+* @args: command input from the user
+* Return: nothing
 */
 void _execute(char **args)
 {
 	pid_t child;
 	char *cmd = NULL, *cmd_path = NULL;
+
 	int cmd_count = 1;
 
 	if (args == NULL)
@@ -16,7 +56,6 @@ void _execute(char **args)
 
 	cmd = args[0];
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
-
 	if (strcmp(cmd, "exit") == 0)
 		exit(EXIT_SUCCESS);
 
@@ -25,18 +64,13 @@ void _execute(char **args)
 		child = fork();
 		if (child < 0)
 		{
-			perror("fork");
-			free(cmd_path);
-			exit(EXIT_FAILURE);
+			handle_fork_failure(cmd_path);
 		}
 		else if (child == 0)
 		{
 			if (execve(cmd_path, args, __environ) == -1)
 			{
-				perror("execve");
-				free(cmd_path);
-				_free(args);
-				exit(EXIT_FAILURE);
+				handle_execve_failure(cmd_path, args);
 			}
 			free(cmd_path);
 			_free(args);
@@ -51,12 +85,9 @@ void _execute(char **args)
 	}
 	else
 	{
-		fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
+		handle_command_not_found(cmd, cmd_count);
 		cmd_count++;
 	}
-	
-	
-
 }
 
 
