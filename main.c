@@ -9,13 +9,16 @@ int main(void)
 {
 	char **args;
 
-	
+
 	while (1)
 	{
 		args = get_command();
 		_execute(args);
-		_free(args);
+		if (args != NULL)
+		{
+			_free(args);
+		}
 	}
-	return(0);
+	return (0);
 
 }

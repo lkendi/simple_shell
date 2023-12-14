@@ -18,7 +18,7 @@ char **get_command(void)
 	/*if getline fails or EOF condition*/
 	if (input_char_count == -1)
 	{
-		if(feof(stdin))
+		if (feof(stdin))
 		{
 			free(user_input);
 			exit(EXIT_SUCCESS);
@@ -29,7 +29,7 @@ char **get_command(void)
 	}
 
 	/*If enter key only (newline) or spaces*/
-	if ((input_char_count == 1 && strcmp(user_input, "\n") == 0 )|| 
+	if ((input_char_count == 1 && strcmp(user_input, "\n") == 0) ||
 			(strspn(user_input, " \t\n") == strlen(user_input)))
 	{
 		free(user_input);
@@ -40,7 +40,7 @@ char **get_command(void)
 	if (input_copy == NULL)
 	{
 		perror("malloc error");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	strcpy(input_copy, user_input);
 

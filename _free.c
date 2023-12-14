@@ -12,7 +12,7 @@ void _free(char **args)
 
 	if (args == NULL)
 		return;
-		
+
 	for (i = 0; args[i] != NULL; i++)
 	{
 		free(args[i]);

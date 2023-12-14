@@ -17,6 +17,9 @@ void _execute(char **args)
 	cmd = args[0];
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
 
+	if (strcmp(cmd, "exit") == 0)
+		exit(EXIT_SUCCESS);
+
 	if (cmd_path != NULL)
 	{
 		child = fork();
@@ -49,12 +52,11 @@ void _execute(char **args)
 	else
 	{
 		fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
-		exit(EXIT_FAILURE);
+		cmd_count++;
 	}
-	cmd_count++;
-	_free(args);
-	exit(EXIT_SUCCESS);
+	
+	
+
 }
 
 
-	
