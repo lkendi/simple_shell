@@ -19,6 +19,7 @@ void excve(char *cmd, char **args);
 void _execute(char **args);
 char **_tokenize(char *input_copy);
 void _free(char **args);
+void exit_shell(void);
 
 
 #endif

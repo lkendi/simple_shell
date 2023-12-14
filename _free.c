@@ -11,9 +11,8 @@ void _free(char **args)
 	int i = 0;
 
 	if (args == NULL)
-	{
 		return;
-	}
+		
 	for (i = 0; args[i] != NULL; i++)
 	{
 		free(args[i]);

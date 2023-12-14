@@ -8,4 +8,5 @@
 void _prompt(void)
 {
 	printf("$ ");
+	fflush(stdout);
 }

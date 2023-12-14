@@ -9,21 +9,14 @@ void _execute(char **args)
 {
 	pid_t child;
 	char *cmd = NULL, *cmd_path = NULL;
-	static int cmd_count = 1;
+	int cmd_count = 1;
 
 	if (args == NULL)
-	{
 		return;
-	}
+
 	cmd = args[0];
-
-	/*if (strcmp(cmd, "exit") == 0)
-		exit(EXIT_SUCCESS);*/
-	
-	/*if (strcmp(cmd, "env") == 0)
-		Handling env command*/
-
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
+
 	if (cmd_path != NULL)
 	{
 		child = fork();
@@ -35,12 +28,15 @@ void _execute(char **args)
 		}
 		else if (child == 0)
 		{
-			if (execve(cmd_path, args, NULL) == -1)
+			if (execve(cmd_path, args, __environ) == -1)
 			{
-				perror("excve");
+				perror("execve");
 				free(cmd_path);
+				_free(args);
 				exit(EXIT_FAILURE);
 			}
+			free(cmd_path);
+			_free(args);
 			_exit(0);
 		}
 		else if (child > 0)
@@ -52,8 +48,13 @@ void _execute(char **args)
 	}
 	else
 	{
-		fprintf(stderr, "./hsh: %d: %s: not found \n", cmd_count, cmd);
-		cmd_count++;
+		fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
+		exit(EXIT_FAILURE);
 	}
+	cmd_count++;
+	_free(args);
+	exit(EXIT_SUCCESS);
 }
 
+
+	

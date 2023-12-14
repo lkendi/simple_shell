@@ -27,6 +27,7 @@ char *get_command_path(char *user_command)
 		if (full_path == NULL)
 		{
 			perror("malloc");
+			free(path_dup);
 			exit(EXIT_FAILURE);
 		}
 		sprintf(full_path, "%s/%s", p_token, user_command);
