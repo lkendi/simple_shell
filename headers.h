@@ -15,11 +15,10 @@
 void _prompt(void);
 char **get_command(void);
 char *get_command_path(char *user_command);
-void excve(char *cmd, char **args);
 void _execute(char **args);
 char **_tokenize(char *input_copy);
 void _free(char **args);
-void exit_shell(void);
-
+void _uncomment(char *str);
+void env_command(void);
 
 #endif

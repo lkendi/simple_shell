@@ -1,5 +1,32 @@
 #include "headers.h"
 
+
+void handle_eof(char *user_input);
+void handle_getline_fail(char *user_input);
+
+/**
+* handle_eof - handles end of file condition
+* @user_input: user command input
+* Return: nothing
+*/
+void handle_eof(char *user_input)
+{
+	free(user_input);
+	exit(EXIT_SUCCESS);
+}
+/**
+* handle_getline_fail - when getline fails
+* @user_input: user command input
+* Return: nothing
+*/
+
+void handle_getline_fail(char *user_input)
+{
+	perror("error");
+	free(user_input);
+	exit(EXIT_FAILURE);
+}
+
 /**
 * get_command - gets the command from the user
 * Return: the user command
@@ -19,13 +46,8 @@ char **get_command(void)
 	if (input_char_count == -1)
 	{
 		if (feof(stdin))
-		{
-			free(user_input);
-			exit(EXIT_SUCCESS);
-		}
-		perror("error");
-		free(user_input);
-		exit(EXIT_FAILURE);
+			handle_eof(user_input);
+		handle_getline_fail(user_input);
 	}
 
 	/*If enter key only (newline) or spaces*/
@@ -67,5 +89,4 @@ char **get_command(void)
 	free(input_copy);
 	free(user_input);
 	return (args);
-
 }
