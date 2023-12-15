@@ -11,10 +11,14 @@ void _uncomment(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[i] == '#')
+		if (str[i] == '#' && (!i || str[i - 1] == ' '))
 		{
-			str[i] = '\0';
-			break;
+			while (str[i] != '\0')
+			{
+				str[i] = '\0';
+				break;
+			}
+			i++;
 		}
 	}
 }

@@ -2,7 +2,8 @@
 
 
 void handle_execve_failure(char *cmd_path, char **args);
-void handle_command_not_found(char *cmd_path, char **args, char *cmd, int cmd_count);
+void handle_command_not_found(char *cmd_path, char **args,
+char *cmd, int cmd_count);
 void handle_fork_failure(char *cmd_path);
 /**
 * handle_execve_failure - handles execve failure
@@ -20,11 +21,14 @@ void handle_execve_failure(char *cmd_path, char **args)
 
 /**
 * handle_command_not_found - handles the case when the command is not found
+* @cmd_path: command path
+* @args: command arguments
 * @cmd: command name
 * @cmd_count: command count
 * Return: nothing
 */
-void handle_command_not_found(char *cmd_path, char **args, char *cmd, int cmd_count)
+void handle_command_not_found(char *cmd_path, char **args,
+char *cmd, int cmd_count)
 {
 	fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
 	free(cmd_path);
@@ -51,20 +55,14 @@ void _execute(char **args)
 {
 	pid_t child;
 	char *cmd = NULL, *cmd_path = NULL;
-
 	int cmd_count = 1;
 
 	if (args == NULL)
 		return;
-
 	cmd = args[0];
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
 	if (strcmp(cmd, "exit") == 0)
-	{
-		free(cmd_path);
-		_free(args);
-		exit(EXIT_SUCCESS);
-	}
+		exit_command(cmd_path, args);
 
 	if (strcmp(cmd, "env") == 0)
 		env_command();
@@ -73,15 +71,12 @@ void _execute(char **args)
 	{
 		child = fork();
 		if (child < 0)
-		{
 			handle_fork_failure(cmd_path);
-		}
 		else if (child == 0)
 		{
 			if (execve(cmd_path, args, __environ) == -1)
-			{
 				handle_execve_failure(cmd_path, args);
-			}
+
 			free(cmd_path);
 			_free(args);
 			_exit(0);
@@ -99,5 +94,3 @@ void _execute(char **args)
 		cmd_count++;
 	}
 }
-
-
