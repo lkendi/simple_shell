@@ -2,7 +2,7 @@
 
 
 void handle_execve_failure(char *cmd_path, char **args);
-void handle_command_not_found(char *cmd, int cmd_count);
+void handle_command_not_found(char *cmd_path, char **args, char *cmd, int cmd_count);
 void handle_fork_failure(char *cmd_path);
 /**
 * handle_execve_failure - handles execve failure
@@ -24,9 +24,12 @@ void handle_execve_failure(char *cmd_path, char **args)
 * @cmd_count: command count
 * Return: nothing
 */
-void handle_command_not_found(char *cmd, int cmd_count)
+void handle_command_not_found(char *cmd_path, char **args, char *cmd, int cmd_count)
 {
 	fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_count, cmd);
+	free(cmd_path);
+	_free(args);
+	exit(127);
 }
 /**
 * handle_fork_failure - handle fork failure
@@ -92,7 +95,7 @@ void _execute(char **args)
 	}
 	else
 	{
-		handle_command_not_found(cmd, cmd_count);
+		handle_command_not_found(cmd_path, args, cmd, cmd_count);
 		cmd_count++;
 	}
 }
