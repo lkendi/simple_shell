@@ -20,6 +20,6 @@ char **_tokenize(char *input_copy);
 void _free(char **args);
 void _uncomment(char *str);
 void env_command(void);
-void exit_command(char *cmd_path, char *args)
+void exit_command(char *cmd_path, char *args);
 
 #endif
