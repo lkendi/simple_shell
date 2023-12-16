@@ -5,6 +5,8 @@ void handle_execve_failure(char *cmd_path, char **args);
 void handle_command_not_found(char *cmd_path, char **args,
 char *cmd, int cmd_count);
 void handle_fork_failure(char *cmd_path);
+void exit_command(char *cmd_path, char **args);
+
 /**
 * handle_execve_failure - handles execve failure
 * @cmd_path: command path
@@ -46,6 +48,20 @@ void handle_fork_failure(char *cmd_path)
 	free(cmd_path);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * exit_command - exits the shell
+ * @cmd_path: previous command path
+ * @args: command arguments
+ * Return: nothing
+*/
+void exit_command(char *cmd_path, char **args)
+{
+	free(cmd_path);
+	_free(args);
+	exit(EXIT_SUCCESS);
+}
+
 /**
 * _execute - executing the command
 * @args: command input from the user
@@ -61,12 +77,8 @@ void _execute(char **args)
 		return;
 	cmd = args[0];
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
-	if (strcmp(cmd, "exit") == 0)
+	if(strcmp(cmd, "exit") == 0)
 		exit_command(cmd_path, args);
-
-	if (strcmp(cmd, "env") == 0)
-		env_command();
-
 	if (cmd_path != NULL)
 	{
 		child = fork();

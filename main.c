@@ -9,8 +9,6 @@ int main(void)
 {
 	char **args;
 
-
-
 	while (1)
 	{
 		args = get_command();
@@ -20,6 +18,6 @@ int main(void)
 			_free(args);
 		}
 	}
-	return (0);
 
+	return (0);
 }
