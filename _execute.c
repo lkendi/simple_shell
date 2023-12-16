@@ -77,7 +77,7 @@ void _execute(char **args)
 		return;
 	cmd = args[0];
 	cmd_path = (cmd[0] == '/') ? strdup(cmd) : get_command_path(cmd);
-	if(strcmp(cmd, "exit") == 0)
+	if (strcmp(cmd, "exit") == 0)
 		exit_command(cmd_path, args);
 	if (cmd_path != NULL)
 	{
