@@ -60,9 +60,5 @@ Implement the `env` built-in command that prints the current environment.
 - Test the shell in both interactive and non-interactive modes, ensuring correct behavior and error handling.
 
 ## Contributors
-Lucy Kendi
-Ridan Hawi
-
-## Conclusion
-
-The Simple Shell project is a challenging yet rewarding endeavor that will test your programming skills and understanding of Unix systems. By completing this project, you'll gain valuable experience in shell programming and system calls, setting the foundation for more advanced projects in the future. Good luck and have fun!
+- Lucy Kendi
+- Ridan Hawi
